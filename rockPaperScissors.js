@@ -1,4 +1,4 @@
-const getComputerChoice = () => {
+const getComputerChoice2 = () => {
     let randomPick = Math.random()
     let computerSelection
 
@@ -10,6 +10,15 @@ const getComputerChoice = () => {
         computerSelection = 'Scissors'
     }
     return computerSelection
+}
+
+const randomElement = (arr) => {
+    return arr[Math.floor(Math.random() * arr.length)]
+}
+
+const getComputerChoice = () => {
+    const selectionArr = ['ROCK', 'PAPER', 'SCISSORS']
+    return randomElement(selectionArr)
 }
 
 const playRound = (computerSelection, userSelection) => {
