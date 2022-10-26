@@ -1,15 +1,54 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <!-- <html lang="en"> -->
 
 <head>
     <meta charset="utf-8">
-    <!-- <link rel="stylesheet" href="./styles.css"> -->
-    <script src="rockPaperScissors.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <!-- <script src="rockPaperScissors.js"></script> -->
     <title>
         Rock Paper Scissors
     </title>
 </head>
 
 <body>
-    <p>Rock Paper Scissors</p>
+    <div class="container">
+        <div class="title">Rock Paper Scissors</div>
+
+        <div class="game">
+            <div class="selectionButtons">
+                <img id="ROCK" type="image" src="./img/rock.png">
+                <img id="PAPER" type="image" src="./img/paper.png">
+                <img id="SCISSORS" type="image" src="./img/scissors.png">
+            </div>
+            <div class="result">
+                <div class="game-result">
+                    Choose your weapon!
+                </div>
+                <div class="game-result2">
+                    <div class="player">
+                        Player <br>
+                        Score: <text id="player-score">0</text> <br>
+                        Selection: <text id="player-selection">?</text>
+                    </div>
+                    <div class="computer">
+                        Computer<br>
+                        Score: <text id="computer-score">0</text><br>
+                        Selection: <text id="computer-selection">?</text>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="buttonDiv"><button id="play-again"> Play Again! </button>
+        </div>
+
+    </div>
+    <div class="footer">
+        <a href="https://www.vecteezy.com/free-vector/rock-paper-scissors">Rock Paper Scissors Vectors by
+            Vecteezy</a>
+    </div>
 </body>
+
+
+<script src="rockPaperScissors.js"></script>
