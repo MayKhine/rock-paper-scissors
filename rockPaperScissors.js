@@ -23,13 +23,14 @@ const getComputerChoice = () => {
 
 const playRound = (computerSelection, userSelection) => {
 
+
     // if rock and rock or paper and paper or scissors and scissors then tie
     // if rock and scissor then rock wins 
     // if scissor and paper then scissor wins
     // if paper and rock then paper wins 
 
     computerSelection = computerSelection.toUpperCase()
-    userSelection = userSelection.toUpperCase()
+    // userSelection = userSelection.toUpperCase()
 
     if (computerSelection == userSelection) {
         return 'TIE'
@@ -51,37 +52,93 @@ const playRound = (computerSelection, userSelection) => {
 
 }
 
-const game = () => {
-    let userGameResult = 0
-    let computerGameResult = 0
-    for (let i = 0; i < 5; i++) {
-        let roundResult = playRound(getComputerChoice(), prompt('ROCK? PAPER? SCISSORS?'))
-        if (roundResult == 'USER') {
-            userGameResult += 1;
-        } else if (roundResult == 'COMPUTER') {
-            computerGameResult += 1;
+// const selectionButtonsDiv = document.querySelector('.selectionButtons');
+// console.log({ selectionButtonsDiv })
+let userSelection;
+let userGameResult = 0;
+let computerGameResult = 0;
+
+// const buttons = document.querySelectorAll('button');
+const imgButtons = document.querySelectorAll('img');
+
+const gameDiv = document.querySelector('.game');
+const resultDiv = document.querySelector('.result');
+const gameResultDiv = document.querySelector('.game-result');
+const computerSelectionEle = document.querySelector('#computer-selection');
+const playerSelectionEle = document.querySelector('#player-selection');
+const computerScoreEle = document.querySelector('#computer-score');
+const playerScoreEle = document.querySelector('#player-score');
+let prevGameDiv;
+
+imgButtons.forEach((button) => {
+    button.addEventListener('click', (button) => {
+        // console.log(button.target.id)
+        userSelection = button.target.id
+        game()
+    })
+})
+
+const updateResult = (gameResult, userSelection, computerSelection) => {
+    // gameResultDiv.innerHTML = gameResult
+    if (gameResult == 'USER') {
+        //update user
+        gameResultDiv.innerHTML = 'User wins!'
+        userGameResult += 1;
+
+    } else if (gameResult == 'COMPUTER') {
+        //update computer
+        gameResultDiv.innerHTML = 'Computer wins!'
+        computerGameResult += 1;
+    } else {
+        //tie
+        gameResultDiv.innerHTML = 'Tie!'
+    }
+    playerSelectionEle.innerHTML = userSelection
+    computerSelectionEle.innerHTML = computerSelection
+    playerScoreEle.innerHTML = userGameResult
+    computerScoreEle.innerHTML = computerGameResult
+
+    if (userGameResult == 5 || computerGameResult == 5) {
+        prevGameDiv = gameDiv;
+        let finalResult = '';
+        if (userGameResult == 5) {
+            finalResult = `<span id='span1'> Player wins!</span><br> <span id='span2'> Player ${userGameResult} : Computer ${computerGameResult} </span>`
+        } else {
+            finalResult = `<span id='span1'> Player wins!</span><br> <span id='span2'> Computer ${computerGameResult} : PLayer ${userGameResult} </span>`
         }
 
-        console.log('Round winner: ', roundResult)
-    }
+        gameDiv.innerHTML = finalResult;
+        const playAgainButton = document.getElementById('play-again') //.style.display = 'block';
+        playAgainButton.style.display = 'block';
 
-    if (userGameResult > computerGameResult) {
-        console.log('USER wins')
-    } else if (computerGameResult > userGameResult) {
-        console.log('Computer Wins')
-    } else {
-        console.log('Tie')
-    }
+        playAgainButton.addEventListener('click', (event) => {
+            location.reload();
+        })
 
-    // let userGameResult = 0
-    // let computerGameResult = 0
-    // let roundResult = playRound(computerSelection, userSelection)
+
+    }
+}
+
+
+
+
+const game = () => {
+    let computerSelection = getComputerChoice()
+
+    let roundResult = playRound(computerSelection, userSelection);
+    // update the game result on html 
+    updateResult(roundResult, userSelection, computerSelection);
+
     // if (roundResult == 'USER') {
-    //     userGameResult += 1;
+    //     console.log('User Wins!')
     // } else if (roundResult == 'COMPUTER') {
-    //     computerGameResult += 1;
+    //     console.log('Computer Wins')
+    // } else {
+    //     console.log('Tie')
     // }
 
 }
 // console.log('Result: ', playRound(getComputerChoice(), 'Rock'))
-game()
+// game()
+
+
